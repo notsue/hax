@@ -39,7 +39,7 @@ source file. A parser should adapt immediatly to these changes,  and return to d
 
 ## Issues
 
-Hax assumes some basic knowledge of xml and/or html
+Hax assumes some basic knowledge of xml and/or html. 
 Bigger hax-documents are not always easy to debug a hax-file without support of an editor 
 that provides some hints with highlighting. Bugs? Well: a missing closing tag, bad 
 nesting of elements,..
