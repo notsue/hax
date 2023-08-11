@@ -9,10 +9,11 @@ Producing wellformed/valid XML-files with less energy. Hax-tags are shortcuts fo
 For example:
 
 XML: <h1,id="section1",property="dc.title">An example</h1>
+
 HAX: \[h1,section1,p=dc.title An example\]
 
 So:
-  - closing tag is nameless;
+  - closing hax-tag is nameless;
   - attributes, sepereted by a comma, can be nameless also, or replaced by a short name 
 
 A hax-parser should convert from HAX-markup to the XML-format.
