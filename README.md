@@ -10,7 +10,7 @@ Edit XML- or HTML5-files with less energy. HaX-tags are shortcuts for XML-tags.
 
 For example:
 
-XML: `<p class="alert" title="I should pop up">An example</h1>•`
+XML: `<p class="alert" title="I should pop up">An example</p>`
 
 HaX: `<p.alert@T="I should pop up" An example>`
 
