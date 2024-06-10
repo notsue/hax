@@ -1,22 +1,22 @@
-# hax
+# HaX
 
-Generic Markup Language **hax**, with parser 'parsehax.py' and editor 'edithax.py'. Creates wellformed XM or (X)HTML. 
+**HaX** is the name of a markup language. 
+A parser 'hax.py' converts HaX to XML, HTML or XHTML.
 
-Please use PURL (persistent URL) to cite this repository: http://purl.org/hax/info
 
 ## Objective
 
-Producing wellformed/valid XML-files with less energy. Hax-tags are shortcuts for XML-tags. 
+Edit XML- or HTML5-files with less energy. HaX-tags are shortcuts for XML-tags. 
 
 For example:
 
-XML: <h1,id="section1",property="dc.title">An example</h1>
+XML: <p class="alert" title="I should pop up">An example</h1>
 
-HAX: \[h1,section1,p=dc.title An example\]
+HaX: <p.alert@T="I should pop up" An example>
 
 So:
-  - closing hax-tag is nameless;
-  - attributes, separeted by a comma, can be nameless also, or replaced by a short name 
+  - endtag is nameless;
+  - attribunames can be reduced to symbol (. in example) or short name (T in example) 
 
 A hax-parser should convert from HAX-markup to the XML-format.
 
