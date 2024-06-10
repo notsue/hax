@@ -1,12 +1,12 @@
 # HaX
 
 **HaX** is the name of a markup language. 
-A parser 'hax.py' converts HaX to XML, HTML or XHTML.
+Comming soon: `hax.py`,  converting HaX to XML, HTML5 or XHTML.
 
 
 ## Objective
 
-Edit XML- or HTML5-files with less energy. HaX-tags are shortcuts for XML-tags. 
+Edit XML- or HTML5-files with less energy. HaX-tags are syntactic sugar for XML-tags. HaX means 'Half XML'. XML-markup is reduced by half. 
 
 For example:
 
