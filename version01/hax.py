@@ -2,7 +2,7 @@ import argparse, os, sys, json, copy
 
 
 __VERSION__ = '0.1'
-__DATE__ = '2024-06-20'
+__DATE__ = '2024-05-20'
 
 DEFAULT_CODE = {
     "elementName": {"Q": "quotation",
