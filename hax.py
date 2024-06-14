@@ -25,7 +25,7 @@ DEFAULT_CODE = {
               "img": "src",
               "script": "src",
               "style": "src",
-			  "button": "type",
+	      "button": "type",
               "-": "class"},
     "semicolon": {"a": "target",
                   "img": "alt",
