@@ -121,7 +121,7 @@ class Haxparser():
             
     def collectMetadata(self):
         
-        self.metadata = {}
+        self.metadata = {'dc:language':'', 'dc:title': ''}
         
         select = self.code["metadata"]
         
