@@ -1,0 +1,60 @@
+<h1!dc:title The HaX Test>
+<p!dc:language en>
+
+<<p class="red" title="Hello World Popup">Paragraph with link: <a href="https://github.com/notsue/hax">HaX @ NotSue</a></p>
+<p class="red" title="Hello World Popup">Paragraph with link: <a href=HAX>HaX @ NotSue>>
+<p.red T="Hello World Popup">Paragraph with link: <a,"https://github.com/notsue/hax">HaX @ NotSue>>
+<<p.red@T="Hello World Popup" Paragraph with link: <a,HAX HaX @ NotSue></p>
+
+<ol
+< item one>
+< item two>
+< nested list
+  <ul 
+    < a thing>
+    < another thing>
+   >>
+< item four>
+> 
+
+<dl
+< term one>
+< definition one>
+< term two>
+< definition two>
+>
+
+<style
+	.green {color: green;}
+<//
+
+<.green Green paragraph>
+
+<F
+<pre <CH
+	"parent": {"ul": "li",
+               "ol": "li",
+               "menu": "li",
+               "table": "caption",
+               "tr": "td",
+               "figure": "figcaption",
+               "dl": ["dt", "dd"],
+                "-": "p"},
+<//>
+< Fragment of json-file>
+>
+
+<p#demo This is a parrot.>
+
+<button,button;"myFunction()" More info>
+
+<script
+function myFunction() {
+  document.getElementById("demo").innerHTML = "The parrot is dead.";
+}
+<//
+
+<!-- Comment hides 
+<p paragraph with <b bold words>.>
+ -->
+
