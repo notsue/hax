@@ -1,6 +1,8 @@
 # HaX
 
 **HaX** is the name of a markup language. 
+Read the [HaX guide](https://notsue.github.io/haxguide.html)
+
 Comming soon: `hax.py`,  converting HaX to XML, HTML5 or XHTML.
 
 
