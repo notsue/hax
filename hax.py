@@ -4,47 +4,6 @@ import argparse, os, sys, json, copy
 __VERSION__ = '0.1'
 __DATE__ = '2024-06-20'
 
-DEFAULT_CODE = {
-    "elementName": {"Q": "quotation",
-                    "F": "figure",
-                    "CH": ["code", {"class":"language-hax"}]},
-    "attributeName": {"P": "property",
-                      "T": "title",
-                      "AR": "role",
-                      "AL": "aria-label",
-                      "ALB": "aria-labeledby"},
-    "value": {"HAX": "https://github.com/notsue/hax",
-              "XML": "https://www.w3.org/TR/xml11/",
-              "XMLID": "https://www.w3.org/TR/xml-id/",
-              "RDFA": "https://en.wikipedia.org/wiki/RDFa",
-              "DC": "https://www.dublincore.org/specifications/dublin-core/dcq-html/"},
-    "hax": {".":"class",
-            "#": "id",
-            "!": "property"},
-    "comma": {"a": "href",
-              "img": "src",
-              "script": "src",
-              "style": "src",
-	      "button": "type",
-              "-": "class"},
-    "semicolon": {"a": "target",
-                  "img": "alt",
-                  "button": "onclick",
-                  "-": "lang"},
-    "parent": {"p": "strong",
-	       "ul": "li",
-               "ol": "li",
-               "menu": "li",
-               "table": "caption",
-               "tr": "td",
-               "figure": "figcaption",
-               "dl": ["dt", "dd"],
-                "-": "p"},
-    "skip": ["script", "style"],
-    "entities": ['code'],
-    "metadata": "property"
-    
-}
 
 class Haxparser():
     
@@ -60,27 +19,20 @@ class Haxparser():
         if self.config['verbose']:
             self.printConfig()
             
-        if self.config['code'] == 'default':
-            self.code = DEFAULT_CODE
-        else:
-            self.loadCode()
-            
+        self.loadCode()
         self.readSource()
-        
         self.parse()
-        if self.config['format'] in ['html', 'xhtml']:
-            self.collectMetadata()
-        
+                
         if self.config['verbose']:
             for n in self.nodes:
-                if n['type'] in ['starttag', 'empty']:
-                    print(n['type'], n['name'], n['attributes'])
-                elif n['type'] == 'endtag':
-                    print(n['type'], n['name'])
-                else:
-                    print(n['type'])
+                print(n)
         
         self.createXML()
+        if self.config['verbose']:
+            print(self.xml)
+        
+        if self.config['format'] in ['html', 'xhtml']:
+            self.collectMetadata()
         if not self.config['wait']:
             if self.config['format'] == 'html':
                 self.output = html5(self.xml, self.metadata)
@@ -126,7 +78,7 @@ class Haxparser():
         
         self.metadata = {'dc:language':'', 'dc:title': ''}
         
-        select = self.code["metadata"]
+        select = "property"
         
         i = 0
         while i < len(self.nodes):
@@ -416,7 +368,7 @@ class Haxparser():
                         fragment += char
             elif state == 'text':
                 if char == '\\' and nxt in ['<', '>', '&']:
-                    fragment += entities(nxt)
+                    fragment += entities[nxt]
                     i += 1; col += 1
                 elif char == '<':
                     position = [line, col]
@@ -631,10 +583,27 @@ def html5(body, metadata):
     doc += '<html lang="%s">\n<head>\n' % metadata['dc:language']
     doc += '<title>%s</title>\n' % metadata['dc:title']
     doc += '<meta charset="utf-8">\n'
+    doc += '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+    doc += '<link rel="stylesheet" href="simple.css">'
+    doc += '<link rel="stylesheet" href="custom-hax.css">'
     for m in metadata.keys():
         doc += '<meta name="%s" content="%s">\n' % (m, metadata[m])
     doc += '</head>\n<body>\n'
+    doc += '''<header>
+    <nav>
+    <a href="../index.html"><img class="icon" src="home.png"> Home</a>
+    <a href="https://github.com/notsue/hax" ><svg class="icon" viewBox="0 0 32 32"><path d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path></svg>GitHub</a>
+    </nav>
+    </header>
+    <main>'''
     doc += body
+    doc += '''</main>
+    <footer>
+     <p><img width="40" height="40" src="cc.svg"> <img width="40" height="40" src="by.svg"></p>
+      <p>Content on this site is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International license</a></p>
+    <p>Style is managed with: <a href="https://simplecss.org/">simple.css</a> | icons from <a href="https://pictogrammers.com/">Pictogrammers</a></p>
+  </footer>
+  '''
     doc += '</body>\n</html>\n'
     return doc
     
@@ -647,6 +616,9 @@ def xhtml5(body,metadata):
     #doc += '<meta charset="utf-8" />\n'
     for m in metadata.keys():
         doc += '<meta name="%s" content="%s" />\n' % (m, metadata[m])
+    doc += '''<style>
+    
+    </style>'''
     doc += '</head>\n<body>\n'
     doc += body
     doc += '</body>\n</html>\n'
